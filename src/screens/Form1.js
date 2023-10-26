@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
   },
   error: {
     color: 'red',
+    marginHorizontal: 10,
   },
   btnContainer: {
     position: 'absolute',
