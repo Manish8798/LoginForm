@@ -6,6 +6,8 @@ import {
   Button,
   StyleSheet,
   SafeAreaView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox'; // Import CheckBox from @react-native-community/checkbox
 import {Picker} from '@react-native-picker/picker'; // Import Picker from @react-native-picker/picker
@@ -45,91 +47,99 @@ const Form3 = props => {
     }
   };
   return (
-    <SafeAreaView style={styles.container}>
-      <Formik
-        initialValues={{
-          countryCode: data?.countryCode,
-          phoneNumber: data?.phoneNumber,
-          acceptTermsAndCondition: false,
-        }}
-        validationSchema={validationSchema}
-        onSubmit={values => {
-          // Handle form submission here
-          //   console.log(values);
-          onSave(values);
-        }}>
-        {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          values,
-          errors,
-          setFieldValue,
-        }) => (
-          <View style={{flex: 1, justifyContent: 'center'}}>
-            <Picker
-              style={[styles.input, {backgroundColor: '#d3d3d3'}]}
-              selectedValue={values.countryCode}
-              onValueChange={itemValue =>
-                setFieldValue('countryCode', itemValue)
-              }>
-              {countryCodes.map(code => (
-                <Picker.Item
-                  key={code.value}
-                  label={code.label}
-                  value={code.value}
-                />
-              ))}
-            </Picker>
-            {errors.countryCode && (
-              <Text style={styles.error}>{errors.countryCode}</Text>
-            )}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <SafeAreaView style={styles.container}>
+        <Formik
+          initialValues={{
+            countryCode: data?.countryCode,
+            phoneNumber: data?.phoneNumber,
+            acceptTermsAndCondition: false,
+          }}
+          validationSchema={validationSchema}
+          onSubmit={values => {
+            // Handle form submission here
+            //   console.log(values);
+            onSave(values);
+          }}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            setFieldValue,
+          }) => (
+            <View style={{flex: 1, justifyContent: 'center'}}>
+              <Text style={styles.inputHeader}>Country Code:</Text>
 
-            <TextInput
-              style={styles.input}
-              placeholder="Phone Number"
-              onChangeText={handleChange('phoneNumber')}
-              onBlur={handleBlur('phoneNumber')}
-              value={values.phoneNumber}
-            />
-            {errors.phoneNumber && (
-              <Text style={styles.error}>{errors.phoneNumber}</Text>
-            )}
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'flex-start',
-              }}>
-              <CheckBox
-                style={styles.checkBox}
-                value={values.acceptTermsAndCondition}
-                onValueChange={value =>
-                  setFieldValue('acceptTermsAndCondition', value)
-                }
+              <Picker
+                style={[styles.input, {backgroundColor: '#d3d3d3'}]}
+                selectedValue={values.countryCode}
+                onValueChange={itemValue =>
+                  setFieldValue('countryCode', itemValue)
+                }>
+                {countryCodes.map(code => (
+                  <Picker.Item
+                    key={code.value}
+                    label={code.label}
+                    value={code.value}
+                  />
+                ))}
+              </Picker>
+              {errors.countryCode && (
+                <Text style={styles.error}>{errors.countryCode}</Text>
+              )}
+              <Text style={styles.inputHeader}>Phone Number:</Text>
+
+              <TextInput
+                style={styles.input}
+                placeholder="Phone Number"
+                onChangeText={handleChange('phoneNumber')}
+                onBlur={handleBlur('phoneNumber')}
+                value={values.phoneNumber}
+                keyboardType="number-pad"
               />
-              <Text>I accept the terms and conditions</Text>
-            </View>
-
-            {errors.acceptTermsAndCondition && (
-              <Text style={styles.error}>{errors.acceptTermsAndCondition}</Text>
-            )}
-
-            <View style={styles.btnContainer}>
-              <View style={{flex: 1, marginRight: 10}}>
-                <Button
-                  title="Back"
-                  onPress={() => props.navigation.goBack()}
+              {errors.phoneNumber && (
+                <Text style={styles.error}>{errors.phoneNumber}</Text>
+              )}
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                }}>
+                <CheckBox
+                  style={styles.checkBox}
+                  value={values.acceptTermsAndCondition}
+                  onValueChange={value =>
+                    setFieldValue('acceptTermsAndCondition', value)
+                  }
                 />
+                <Text>I accept the terms and conditions</Text>
               </View>
-              <View style={{flex: 1, marginLeft: 10}}>
-                <Button title="Save" onPress={handleSubmit} />
+
+              {errors.acceptTermsAndCondition && (
+                <Text style={styles.error}>
+                  {errors.acceptTermsAndCondition}
+                </Text>
+              )}
+
+              <View style={styles.btnContainer}>
+                <View style={{flex: 1, marginRight: 10}}>
+                  <Button
+                    title="Back"
+                    onPress={() => props.navigation.goBack()}
+                  />
+                </View>
+                <View style={{flex: 1, marginLeft: 10}}>
+                  <Button title="Save" onPress={handleSubmit} />
+                </View>
               </View>
             </View>
-          </View>
-        )}
-      </Formik>
-    </SafeAreaView>
+          )}
+        </Formik>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -171,6 +181,12 @@ const styles = StyleSheet.create({
   checkBox: {
     alignSelf: 'center',
     marginStart: 8,
+  },
+  inputHeader: {
+    marginHorizontal: 10,
+    paddingHorizontal: 8,
+    fontWeight: 'bold',
+    marginTop: 2,
   },
 });
 

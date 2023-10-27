@@ -6,6 +6,8 @@ import {
   Button,
   StyleSheet,
   SafeAreaView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 import {Formik} from 'formik';
 import * as yup from 'yup';
@@ -35,46 +37,50 @@ const Form1 = props => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Formik
-        initialValues={{emailId: data?.emailId, password: data?.password}}
-        validationSchema={validationSchema}
-        onSubmit={values => {
-          // Handle form submission here
-          console.log(values);
-          onSave(values);
-        }}>
-        {({handleChange, handleBlur, handleSubmit, values, errors}) => (
-          <View style={{flex: 1, justifyContent: 'center'}}>
-            <TextInput
-              style={styles.input}
-              placeholder="Email ID"
-              onChangeText={handleChange('emailId')}
-              onBlur={handleBlur('emailId')}
-              value={values.emailId}
-            />
-            {errors.emailId && (
-              <Text style={styles.error}>{errors.emailId}</Text>
-            )}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <SafeAreaView style={styles.container}>
+        <Formik
+          initialValues={{emailId: data?.emailId, password: data?.password}}
+          validationSchema={validationSchema}
+          onSubmit={values => {
+            // Handle form submission here
+            console.log(values);
+            onSave(values);
+          }}>
+          {({handleChange, handleBlur, handleSubmit, values, errors}) => (
+            <View style={{flex: 1, justifyContent: 'center'}}>
+              <Text style={styles.inputHeader}>Email ID:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Email ID"
+                onChangeText={handleChange('emailId')}
+                onBlur={handleBlur('emailId')}
+                value={values.emailId}
+              />
+              {errors.emailId && (
+                <Text style={styles.error}>{errors.emailId}</Text>
+              )}
+              <Text style={styles.inputHeader}>Password:</Text>
 
-            <TextInput
-              style={styles.input}
-              placeholder="Password"
-              secureTextEntry
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
-              value={values.password}
-            />
-            {errors.password && (
-              <Text style={styles.error}>{errors.password}</Text>
-            )}
-            <View style={styles.btnContainer}>
-              <Button title="Save" onPress={handleSubmit} />
+              <TextInput
+                style={styles.input}
+                placeholder="Password"
+                secureTextEntry
+                onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
+                value={values.password}
+              />
+              {errors.password && (
+                <Text style={styles.error}>{errors.password}</Text>
+              )}
+              <View style={styles.btnContainer}>
+                <Button title="Save" onPress={handleSubmit} />
+              </View>
             </View>
-          </View>
-        )}
-      </Formik>
-    </SafeAreaView>
+          )}
+        </Formik>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -108,6 +114,12 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 2,
     borderTopRightRadius: 2,
     padding: 20,
+  },
+  inputHeader: {
+    marginHorizontal: 10,
+    paddingHorizontal: 8,
+    fontWeight: 'bold',
+    marginTop: 2,
   },
 });
 

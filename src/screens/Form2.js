@@ -6,6 +6,8 @@ import {
   Button,
   StyleSheet,
   SafeAreaView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 import {Formik} from 'formik';
 import * as yup from 'yup';
@@ -44,68 +46,71 @@ const Form2 = props => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Formik
-        initialValues={{
-          firstName: data?.firstName,
-          lastName: data?.lastName,
-          address: data?.address,
-        }}
-        validationSchema={validationSchema}
-        onSubmit={values => {
-          // Handle form submission here
-          //   console.log(values);
-          onSave(values);
-        }}>
-        {({handleChange, handleBlur, handleSubmit, values, errors}) => (
-          <View style={{flex: 1, justifyContent: 'center'}}>
-            <TextInput
-              style={styles.input}
-              placeholder="First Name"
-              onChangeText={handleChange('firstName')}
-              onBlur={handleBlur('firstName')}
-              value={values.firstName}
-            />
-            {errors.firstName && (
-              <Text style={styles.error}>{errors.firstName}</Text>
-            )}
-
-            <TextInput
-              style={styles.input}
-              placeholder="Last Name (optional)"
-              onChangeText={handleChange('lastName')}
-              onBlur={handleBlur('lastName')}
-              value={values.lastName}
-            />
-            {errors.lastName && (
-              <Text style={styles.error}>{errors.lastName}</Text>
-            )}
-
-            <TextInput
-              style={styles.input}
-              placeholder="Address"
-              onChangeText={handleChange('address')}
-              onBlur={handleBlur('address')}
-              value={values.address}
-            />
-            {errors.address && (
-              <Text style={styles.error}>{errors.address}</Text>
-            )}
-            <View style={styles.btnContainer}>
-              <View style={{flex: 1, marginRight: 10}}>
-                <Button
-                  title="Back"
-                  onPress={() => props.navigation.goBack()}
-                />
-              </View>
-              <View style={{flex: 1, marginLeft: 10}}>
-                <Button title="Save and Next" onPress={handleSubmit} />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <SafeAreaView style={styles.container}>
+        <Formik
+          initialValues={{
+            firstName: data?.firstName,
+            lastName: data?.lastName,
+            address: data?.address,
+          }}
+          validationSchema={validationSchema}
+          onSubmit={values => {
+            // Handle form submission here
+            //   console.log(values);
+            onSave(values);
+          }}>
+          {({handleChange, handleBlur, handleSubmit, values, errors}) => (
+            <View style={{flex: 1, justifyContent: 'center'}}>
+              <Text style={styles.inputHeader}>First Name:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="First Name"
+                onChangeText={handleChange('firstName')}
+                onBlur={handleBlur('firstName')}
+                value={values.firstName}
+              />
+              {errors.firstName && (
+                <Text style={styles.error}>{errors.firstName}</Text>
+              )}
+              <Text style={styles.inputHeader}>Last Name:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Last Name (optional)"
+                onChangeText={handleChange('lastName')}
+                onBlur={handleBlur('lastName')}
+                value={values.lastName}
+              />
+              {errors.lastName && (
+                <Text style={styles.error}>{errors.lastName}</Text>
+              )}
+              <Text style={styles.inputHeader}>Address:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Address"
+                onChangeText={handleChange('address')}
+                onBlur={handleBlur('address')}
+                value={values.address}
+              />
+              {errors.address && (
+                <Text style={styles.error}>{errors.address}</Text>
+              )}
+              <View style={styles.btnContainer}>
+                <View style={{flex: 1, marginRight: 10}}>
+                  <Button
+                    title="Back"
+                    onPress={() => props.navigation.goBack()}
+                  />
+                </View>
+                <View style={{flex: 1, marginLeft: 10}}>
+                  <Button title="Save and Next" onPress={handleSubmit} />
+                </View>
               </View>
             </View>
-          </View>
-        )}
-      </Formik>
-    </SafeAreaView>
+          )}
+        </Formik>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -143,6 +148,12 @@ const styles = StyleSheet.create({
     // justifyContent: 'space-between',
     alignItems: 'center',
     display: 'flex',
+  },
+  inputHeader: {
+    marginHorizontal: 10,
+    paddingHorizontal: 8,
+    fontWeight: 'bold',
+    marginTop: 2,
   },
 });
 
