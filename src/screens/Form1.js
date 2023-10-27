@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // alignItems: 'center',
     paddingTop: 16,
+    backgroundColor: '#fff',
   },
   input: {
     height: 40,

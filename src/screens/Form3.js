@@ -68,7 +68,7 @@ const Form3 = props => {
         }) => (
           <View style={{flex: 1, justifyContent: 'center'}}>
             <Picker
-              style={styles.input}
+              style={[styles.input, {backgroundColor: '#d3d3d3'}]}
               selectedValue={values.countryCode}
               onValueChange={itemValue =>
                 setFieldValue('countryCode', itemValue)
@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // alignItems: 'center',
     paddingTop: 16,
+    backgroundColor: '#fff',
   },
   input: {
     height: 40,
