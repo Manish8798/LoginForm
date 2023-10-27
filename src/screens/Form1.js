@@ -44,7 +44,7 @@ const Form1 = props => {
           validationSchema={validationSchema}
           onSubmit={values => {
             // Handle form submission here
-            console.log(values);
+            // console.log(values);
             onSave(values);
           }}>
           {({handleChange, handleBlur, handleSubmit, values, errors}) => (

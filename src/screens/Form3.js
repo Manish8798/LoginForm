@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Modal,
+  ScrollView,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox'; // Import CheckBox from @react-native-community/checkbox
 import {Picker} from '@react-native-picker/picker'; // Import Picker from @react-native-picker/picker
@@ -151,50 +152,59 @@ const Form3 = props => {
           onRequestClose={toggleModal}>
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
-              <View style={styles.hTextContainer}>
-                <Text style={styles.text}>Email ID:</Text>
-                <Text style={[styles.text, {color: 'gray', flex: 2}]}>
-                  {data?.emailId}
-                </Text>
-              </View>
-              <View style={styles.hTextContainer}>
-                <Text style={styles.text}>Password:</Text>
-                <Text style={[styles.text, {color: 'gray', flex: 2}]}>
-                  {data?.password}
-                </Text>
-              </View>
-              <View style={styles.hTextContainer}>
-                <Text style={styles.text}>First Name:</Text>
-                <Text style={[styles.text, {color: 'gray', flex: 2}]}>
-                  {data?.firstName}
-                </Text>
-              </View>
-              <View style={styles.hTextContainer}>
-                <Text style={styles.text}>Last Name:</Text>
-                <Text style={[styles.text, {color: 'gray', flex: 2}]}>
-                  {data?.lastName ? data?.lastName : 'Not Provided'}
-                </Text>
-              </View>
-              <View style={styles.hTextContainer}>
-                <Text style={styles.text}>Address:</Text>
-                <Text style={[styles.text, {color: 'gray', flex: 2}]}>
-                  {data?.address}
-                </Text>
-              </View>
-              <View style={styles.hTextContainer}>
-                <Text style={styles.text}>Country Code:</Text>
-                <Text style={[styles.text, {color: 'gray', flex: 2}]}>
-                  {data?.countryCode}
-                </Text>
-              </View>
-              <View style={styles.hTextContainer}>
-                <Text style={styles.text}>Phone Number:</Text>
-                <Text style={[styles.text, {color: 'gray', flex: 2}]}>
-                  {data?.phoneNumber}
-                </Text>
-              </View>
+              <ScrollView
+                showsVerticalScrollIndicator={false}
+                style={styles.scrollView}>
+                <View style={styles.hTextContainer}>
+                  <Text style={styles.text}>Email ID:</Text>
+                  <Text style={[styles.text, {color: 'gray', flex: 2}]}>
+                    {data?.emailId}
+                  </Text>
+                </View>
+                <View style={styles.hTextContainer}>
+                  <Text style={styles.text}>Password:</Text>
+                  <Text style={[styles.text, {color: 'gray', flex: 2}]}>
+                    {data?.password}
+                  </Text>
+                </View>
+                <View style={styles.hTextContainer}>
+                  <Text style={styles.text}>First Name:</Text>
+                  <Text style={[styles.text, {color: 'gray', flex: 2}]}>
+                    {data?.firstName}
+                  </Text>
+                </View>
+                <View style={styles.hTextContainer}>
+                  <Text style={styles.text}>Last Name:</Text>
+                  <Text style={[styles.text, {color: 'gray', flex: 2}]}>
+                    {data?.lastName ? data?.lastName : 'Not Provided'}
+                  </Text>
+                </View>
+                <View style={styles.hTextContainer}>
+                  <Text style={styles.text}>Address:</Text>
+                  <Text style={[styles.text, {color: 'gray', flex: 2}]}>
+                    {data?.address}
+                  </Text>
+                </View>
+                <View style={styles.hTextContainer}>
+                  <Text style={styles.text}>Country Code:</Text>
+                  <Text style={[styles.text, {color: 'gray', flex: 2}]}>
+                    {data?.countryCode}
+                  </Text>
+                </View>
+                <View style={styles.hTextContainer}>
+                  <Text style={styles.text}>Phone Number:</Text>
+                  <Text style={[styles.text, {color: 'gray', flex: 2}]}>
+                    {data?.phoneNumber}
+                  </Text>
+                </View>
+              </ScrollView>
               <View
-                style={{position: 'absolute', bottom: 20, start: 10, end: 10}}>
+                style={{
+                  position: 'absolute',
+                  bottom: 20,
+                  start: 10,
+                  end: 10,
+                }}>
                 <Button title="Submit" onPress={() => toggleModal()} />
               </View>
             </View>
@@ -278,6 +288,9 @@ const styles = StyleSheet.create({
     padding: 10,
     color: '#000',
     flex: 1,
+  },
+  scrollView: {
+    paddingBottom: 40,
   },
 });
 

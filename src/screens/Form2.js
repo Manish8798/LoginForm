@@ -30,7 +30,8 @@ const validationSchema = yup.object().shape({
   address: yup
     .string()
     .required('Address is required')
-    .min(10, 'Address must be at least 10 characters'),
+    .min(10, 'Address must be at least 10 characters')
+    .max(200, 'Address must not exceed 200 characters'),
 });
 
 const Form2 = props => {
