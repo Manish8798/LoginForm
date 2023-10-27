@@ -40,6 +40,16 @@ const countryCodes = [
 const Form3 = props => {
   const {data, updateData} = useContext(FormContext);
   const [isModalVisible, setModalVisible] = useState(false);
+  const titles = [
+    'Email ID',
+    'Password',
+    'First Name',
+    'Last Name',
+    'Address',
+    'Country Code',
+    'Phone Number',
+  ];
+  let values = Object.values(data);
 
   const toggleModal = () => {
     setModalVisible(state => !state);
@@ -153,50 +163,17 @@ const Form3 = props => {
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
               <ScrollView
+                contentContainerStyle={styles.scrollView}
                 showsVerticalScrollIndicator={false}
                 style={styles.scrollView}>
-                <View style={styles.hTextContainer}>
-                  <Text style={styles.text}>Email ID:</Text>
-                  <Text style={[styles.text, {color: 'gray', flex: 2}]}>
-                    {data?.emailId}
-                  </Text>
-                </View>
-                <View style={styles.hTextContainer}>
-                  <Text style={styles.text}>Password:</Text>
-                  <Text style={[styles.text, {color: 'gray', flex: 2}]}>
-                    {data?.password}
-                  </Text>
-                </View>
-                <View style={styles.hTextContainer}>
-                  <Text style={styles.text}>First Name:</Text>
-                  <Text style={[styles.text, {color: 'gray', flex: 2}]}>
-                    {data?.firstName}
-                  </Text>
-                </View>
-                <View style={styles.hTextContainer}>
-                  <Text style={styles.text}>Last Name:</Text>
-                  <Text style={[styles.text, {color: 'gray', flex: 2}]}>
-                    {data?.lastName ? data?.lastName : 'Not Provided'}
-                  </Text>
-                </View>
-                <View style={styles.hTextContainer}>
-                  <Text style={styles.text}>Address:</Text>
-                  <Text style={[styles.text, {color: 'gray', flex: 2}]}>
-                    {data?.address}
-                  </Text>
-                </View>
-                <View style={styles.hTextContainer}>
-                  <Text style={styles.text}>Country Code:</Text>
-                  <Text style={[styles.text, {color: 'gray', flex: 2}]}>
-                    {data?.countryCode}
-                  </Text>
-                </View>
-                <View style={styles.hTextContainer}>
-                  <Text style={styles.text}>Phone Number:</Text>
-                  <Text style={[styles.text, {color: 'gray', flex: 2}]}>
-                    {data?.phoneNumber}
-                  </Text>
-                </View>
+                {titles.map((val, index) => (
+                  <View key={index} style={styles.hTextContainer}>
+                    <Text style={styles.text}>{val}:</Text>
+                    <Text style={[styles.text, {color: 'gray', flex: 2}]}>
+                      {values[index] ? values[index] : 'Not Provided'}
+                    </Text>
+                  </View>
+                ))}
               </ScrollView>
               <View
                 style={{
