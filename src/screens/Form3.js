@@ -41,7 +41,7 @@ const Form3 = props => {
     let res = await updateData({...data, ...values});
     // console.log('onSave', res);
     if (res) {
-      props.navigation.navigate('Form3');
+      console.log('onSave', data);
     }
   };
   return (
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   },
   checkBox: {
     alignSelf: 'center',
-    marginHorizontal: 5,
+    marginStart: 8,
   },
 });
 
