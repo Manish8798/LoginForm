@@ -15,7 +15,7 @@ const FormProvider = ({children}) => {
   const [state, setState] = useState(initialState);
 
   const updateData = async newData => {
-    console.log('FormProvider', newData);
+    // console.log('FormProvider', newData);
     try {
       setState(newData);
     } catch (error) {
