@@ -74,7 +74,16 @@ const Form1 = props => {
                 <Text style={styles.error}>{errors.password}</Text>
               )}
               <View style={styles.btnContainer}>
-                <Button title="Save" onPress={handleSubmit} />
+                <View style={{flex: 1, marginRight: 10}}>
+                  <Button
+                    disabled
+                    title="Back"
+                    onPress={() => props.navigation.goBack()}
+                  />
+                </View>
+                <View style={{flex: 1, marginLeft: 10}}>
+                  <Button title="Save" onPress={handleSubmit} />
+                </View>
               </View>
             </View>
           )}
@@ -114,6 +123,10 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 2,
     borderTopRightRadius: 2,
     padding: 20,
+    flexDirection: 'row',
+    // justifyContent: 'space-between',
+    alignItems: 'center',
+    display: 'flex',
   },
   inputHeader: {
     marginHorizontal: 10,
