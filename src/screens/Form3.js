@@ -208,6 +208,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     paddingHorizontal: 8,
     borderRadius: 2,
+    color: '#000',
   },
   error: {
     color: 'red',
@@ -236,6 +237,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     fontWeight: 'bold',
     marginTop: 2,
+    color: '#000',
   },
   modalContainer: {
     flex: 1,
